@@ -11,29 +11,6 @@ Require this package with composer.
 composer require straylightagency/laravel-airtable
 ```
 
-### Laravel without auto-discovery:
-
-If you don't use auto-discovery, add the ServiceProvider to the providers array in `config/app.php`:
-```php
-Straylightagency\LaravelAirTable\AirTableServiceProvider::class,
-```
-
-Then add this line to your facades in `config/app.php`:
-```php
-'AirTable' => Straylightagency\LaravelAirTable\AirTable::class,
-```
-
-## Usage
-
-```php
-use Straylightagency\LaravelAirTable\AirTable;
-
-$recordsA = $airTable->table('Your table')->view('View')->get();
-$recordsB = $airTable->table('Another table')->where('key', '=', 'value' )->view('In view this view')->get();
-```
-
-### With Laravel
-
 Define your environment variables into your .env file :
 ```dotenv
 AIRTABLE_BASE_ID="app**************"
@@ -41,11 +18,32 @@ AIRTABLE_API_KEY="key**************"
 AIRTABLE_API_URL="https://api.airtable.com/v0/%s/" # optional
 ```
 
+Use this artisan command to publish the airtable.php file inside your config folder :
+```shell
+php artisan vendor:publish --tag=airtable
+```
+
+### Laravel without auto-discovery:
+
+If you don't use auto-discovery, add the `AirTableServiceProvider` to the providers array in `bootstrap/providers.php`:
+```php
+\Straylightagency\LaravelAirTable\AirTableServiceProvider::class,
+```
+
+Then add this line to your facades in `config/app.php`:
+```php
+'AirTable' => \Straylightagency\LaravelAirTable\AirTable::class,
+```
+
+## Usage
+
 The package provides by default a Facade for Laravel application. You can call methods directly using the Facade or use the alias instead.
+
 ```php
 use Straylightagency\LaravelAirTable\AirTable;
 
 $recordsA = AirTable::table('Your table')->view('View')->get();
+$recordsB = AirTable::table('Another table')->where('key', '=', 'value' )->view('In view this view')->get();
 ```
 
 ### API documentation

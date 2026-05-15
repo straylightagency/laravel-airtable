@@ -19,7 +19,7 @@ class AirTableServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('airtable', fn () => new AirTableManager(
+        $this->app->singleton(AirTableManager::class, fn () => new AirTableManager(
             apiKey: config('airtable.api_key'),
             baseId: config('airtable.base_id'),
             apiUrl: config('airtable.api_url'),
@@ -36,7 +36,7 @@ class AirTableServiceProvider extends BaseServiceProvider
         if ( $this->app->runningInConsole() ) {
             $this->publishes( [
                 __DIR__ . '/config.php' => config_path('airtable.php'),
-            ] );
+            ], 'airtable' );
         }
     }
 
