@@ -1,7 +1,7 @@
 {
     "name": "straylightagency/laravel-airtable",
     "type": "library",
-    "description": "An Airtable Client",
+    "description": "Interact with Airtable using a fluent API.",
     "keywords": [
         "airtable",
         "client",
