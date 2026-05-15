@@ -1,0 +1,30 @@
+{
+    "name": "straylightagency/laravel-airtable",
+    "type": "library",
+    "description": "An Airtable Client",
+    "keywords": [
+        "airtable",
+        "client",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Anthony Pauwels",
+            "email": "anthony@straylightagency.be",
+            "homepage": "https://straylightagency.be/"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Straylightagency\\LaravelAirTable\\": "src/"
+        }
+    }
+}
