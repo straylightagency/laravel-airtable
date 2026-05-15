@@ -18,7 +18,7 @@ AIRTABLE_API_KEY="key**************"
 AIRTABLE_API_URL="https://api.airtable.com/v0/%s/" # optional
 ```
 
-Use this artisan command to publish the airtable.php file inside your config folder :
+Use this artisan command to publish the `airtable.php` file inside your config folder :
 ```shell
 php artisan vendor:publish --tag=airtable
 ```
