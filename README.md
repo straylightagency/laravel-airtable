@@ -27,7 +27,21 @@ composer require straylightagency/laravel-airtable
 
 ---
 
-## Configuration
+## Laravel Integration
+
+### Auto-discovery
+
+The package supports Laravel auto-discovery out of the box.
+
+### Manual registration
+
+If auto-discovery is disabled, register the service provider manually in `bootstrap/providers.php`:
+
+```php
+Straylightagency\LaravelAirtable\AirtableServiceProvider::class,
+```
+
+### Configuration
 
 Add your Airtable credentials to your `.env` file:
 
@@ -37,26 +51,10 @@ AIRTABLE_TOKEN="patXXXXXXXXXXXXXX"
 AIRTABLE_API_URL="https://api.airtable.com/v0/%s/" # optional
 ```
 
----
+Use this artisan command to publish the `captcha.php` file inside your config folder :
 
-## Laravel Integration
-
-### Auto-discovery
-
-The package supports Laravel auto-discovery out of the box.
-
-### Manual registration
-
-If auto-discovery is disabled, register the service provider manually in `config/app.php`:
-
-```php
-Straylightagency\LaravelAirtable\AirtableServiceProvider::class,
-```
-
-You can also register the Facade alias manually:
-
-```php
-'Airtable' => Straylightagency\LaravelAirtable\Facades\Airtable::class,
+```shell
+php artisan vendor:publish --tag=captcha
 ```
 
 ---
