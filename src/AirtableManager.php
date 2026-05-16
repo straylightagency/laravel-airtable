@@ -19,12 +19,12 @@ class AirtableManager
     /**
      * AirtableManager constructor.
      *
-     * @param string $apiKey
+     * @param string $token
      * @param string $baseId
      * @param string $apiUrl
      */
     public function __construct(
-        protected string $apiKey,
+        protected string $token,
         protected string $baseId,
         protected string $apiUrl = self::API_URL
     ) {
@@ -56,7 +56,7 @@ class AirtableManager
         return $this->bases[ $base_id ] = new Base(
             new Client(
                 baseUrl: sprintf( $this->apiUrl, $base_id ),
-                apiKey: $this->apiKey
+                token: $this->token
             )
         );
     }

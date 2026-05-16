@@ -20,11 +20,11 @@ class Client
      * Client constructor.
      *
      * @param string $baseUrl
-     * @param string $apiKey
+     * @param string $token
      */
     public function __construct(
         protected string $baseUrl,
-        protected string $apiKey
+        protected string $token
     ) {
     }
 
@@ -129,7 +129,7 @@ class Client
     protected function makeRequest(): PendingRequest
     {
         return Http::baseUrl( $this->baseUrl )
-            ->withToken( $this->apiKey )
+            ->withToken( $this->token )
             ->acceptJson()
             ->asJson();
     }

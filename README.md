@@ -1,177 +1,283 @@
-# Laravel Airtable Manager
+# Laravel Airtable
 
-Interact with Airtable using a fluent API.
+A fluent Airtable client for Laravel applications.
 
-Query, insert, update and manage Airtable records using an expressive Laravel-style syntax.
+Query, insert, update and manage Airtable records using an expressive Laravel-style API.
+
+---
+
+## Features
+
+- Fluent Laravel-style query builder
+- Airtable CRUD operations
+- Multi-base support
+- Laravel Facade support
+- Lightweight and dependency-free
+- PHP 8.3+ compatible
+
+---
 
 ## Installation
 
-Require this package with composer.
-```shell
+Install the package using Composer:
+
+```bash
 composer require straylightagency/laravel-airtable
 ```
 
-Define your environment variables into your .env file :
+---
+
+## Configuration
+
+Add your Airtable credentials to your `.env` file:
+
 ```dotenv
-AIRTABLE_BASE_ID="app**************"
-AIRTABLE_API_KEY="key**************"
+AIRTABLE_BASE_ID="appXXXXXXXXXXXXXX"
+AIRTABLE_TOKEN="patXXXXXXXXXXXXXX"
 AIRTABLE_API_URL="https://api.airtable.com/v0/%s/" # optional
 ```
 
-Use this artisan command to publish the `airtable.php` file inside your config folder :
-```shell
-php artisan vendor:publish --tag=airtable
-```
+---
 
-### Laravel without auto-discovery:
+## Laravel Integration
 
-If you don't use auto-discovery, add the `AirtableServiceProvider` to the providers array in `bootstrap/providers.php`:
+### Auto-discovery
+
+The package supports Laravel auto-discovery out of the box.
+
+### Manual registration
+
+If auto-discovery is disabled, register the service provider manually in `config/app.php`:
+
 ```php
-\Straylightagency\LaravelAirtable\AirtableServiceProvider::class,
+Straylightagency\LaravelAirtable\AirtableServiceProvider::class,
 ```
 
-Then add this line to your facades in `config/app.php`:
+You can also register the Facade alias manually:
+
 ```php
-'Airtable' => \Straylightagency\LaravelAirtable\Airtable::class,
+'Airtable' => Straylightagency\LaravelAirtable\Facades\Airtable::class,
 ```
+
+---
+
+## Quick Start
+
+```php
+use Straylightagency\LaravelAirtable\Facades\Airtable;
+
+$records = Airtable::table('Users')
+    ->view('Active users')
+    ->get();
+```
+
+---
 
 ## Usage
 
-The package provides by default a Facade for Laravel application. You can call methods directly using the Facade or use the alias instead.
+### Selecting records
 
 ```php
-use Straylightagency\LaravelAirtable\Airtable;
-
-$recordsA = Airtable::table('Your table')->view('View')->get();
-$recordsB = Airtable::table('Another table')->where('key', '=', 'value' )->view('In view this view')->get();
+$records = Airtable::table('Users')->get();
 ```
 
-### API documentation
+### Filtering records
 
-#### AirtableManager
 ```php
-/**
- * Get a builder for a table from the default Base set in constructor
- */
-function table(string $table_name): Table;
-
-/**
- * Create a Base builder object with a new Client, using the same API key and API url set in your config.
- */
-function on(string $base_id): Base;
+$records = Airtable::table('Users')
+    ->where('status', '=', 'active')
+    ->get();
 ```
 
-#### Base
+### Multiple conditions
+
 ```php
-/**
- * Get a table builder for a table.
- */
-function table(string $table_name): Table;
+$records = Airtable::table('Users')
+    ->where('status', 'active')
+    ->where('country', 'Belgium')
+    ->get();
 ```
 
-#### Table
+### Using views
+
 ```php
-/**
- * Count the number of elements inside the query
- */
-function count(): int;
-
-/**
- * If Airtable must perform an automatic data conversion from string values
- */
-function typecast(bool $value): Table;
-
-/**
- * Delay between request
- */
-function delay(int $value): Table;
-
-/**
- * Search for specific fields from records
- */
-function fields(array|string $fields): Table;
-
-/**
- * Filter records using a logical where operation
- */
-function where(string $field, mixed $operator, $value = null): Table;
-
-/**
- * Filter records using a raw query
- */
-function whereRaw(string $formula): Table;
-
-/**
- * Get records from a specific view
- */
-function view(string $view_name): Table;
-
-/**
- * Order records by a field and direction
- */
-function orderBy(string $field, string $direction = 'asc'): Table;
-
-/**
- * Set the limit value to get a limited number of records
- */
-function limit(int $value): Table;
-
-/**
- * Alias to limit method
- */
-function take(int $value): Table;
-
-/**
- * Set the offset value to get records from a specific page
- */
-function offset(int $value): Table;
-
-/**
- * Alias to offset method
- */
-function skip(int $value): Table;
-
-/**
- * Get records with a limit of 100 by page
- */
-function get(): array;
-
-/**
- * Method alias to get, return all records
- */
-function all(): array;
-
-/**
- * Get the first record
- */
-function first(): array;
-
-/**
- * Find a record using his ID
- */
-function find(string $id): array;
-
-/**
- * Insert a record
- */
-function insert(array $data): array;
-
-/**
- * Update a record or many records. Destructive way
- */
-function update(array|string $id, array $data = null): array;
-
-/**
- * Patch a single record or many records
- */
-function patch(array|string $id, array $data = null): array;
-
-/**
- * Delete a single record
- */
-function delete(string $id): array;
+$records = Airtable::table('Users')
+    ->view('Public')
+    ->get();
 ```
 
-### Requirement
+### Selecting specific fields
 
-PHP 8.3 or above
+```php
+$records = Airtable::table('Users')
+    ->fields(['name', 'email'])
+    ->get();
+```
+
+### Ordering records
+
+```php
+$records = Airtable::table('Users')
+    ->orderBy('name')
+    ->get();
+```
+
+### Limiting results
+
+```php
+$records = Airtable::table('Users')
+    ->limit(10)
+    ->get();
+```
+
+### Pagination
+
+```php
+$records = Airtable::table('Users')
+    ->limit(50)
+    ->offset(100)
+    ->get();
+```
+
+---
+
+## CRUD Operations
+
+### Find a record
+
+```php
+$record = Airtable::table('Users')
+    ->find('recXXXXXXXXXXXXXX');
+```
+
+### Get first record
+
+```php
+$record = Airtable::table('Users')
+    ->where('email', 'john@example.com')
+    ->first();
+```
+
+### Insert a record
+
+```php
+$record = Airtable::table('Users')->insert([
+    'Name' => 'John Doe',
+    'Email' => 'john@example.com',
+]);
+```
+
+### Update a record
+
+```php
+$record = Airtable::table('Users')->update(
+    'recXXXXXXXXXXXXXX',
+    [
+        'Name' => 'John Doe',
+    ]
+);
+```
+
+### Patch a record
+
+```php
+$record = Airtable::table('Users')->patch(
+    'recXXXXXXXXXXXXXX',
+    [
+        'Name' => 'Updated name',
+    ]
+);
+```
+
+### Delete a record
+
+```php
+$record = Airtable::table('Users')
+    ->delete('recXXXXXXXXXXXXXX');
+```
+
+---
+
+## Multi-base Support
+
+You can dynamically switch Airtable bases:
+
+```php
+$records = Airtable::on('appXXXXXXXXXXXXXX')
+    ->table('Users')
+    ->get();
+```
+
+---
+
+## API Reference
+
+### AirtableManager
+
+```php
+table(string $table_name): Table
+on(string $base_id): Base
+```
+
+### Base
+
+```php
+table(string $table_name): Table
+```
+
+### Table
+
+```php
+count(): int
+
+typecast(bool $value): Table
+
+delay(int $value): Table
+
+fields(array|string $fields): Table
+
+where(string $field, mixed $operator, $value = null): Table
+
+whereRaw(string $formula): Table
+
+view(string $view_name): Table
+
+orderBy(string $field, string $direction = 'asc'): Table
+
+limit(int $value): Table
+
+take(int $value): Table
+
+offset(int $value): Table
+
+skip(int $value): Table
+
+get(): array
+
+all(): array
+
+first(): array
+
+find(string $id): array
+
+insert(array $data): array
+
+update(array|string $id, array $data = null): array
+
+patch(array|string $id, array $data = null): array
+
+delete(string $id): array
+```
+
+---
+
+## Requirements
+
+- PHP 8.3+
+- Laravel 11+
+
+---
+
+## License
+
+This package is open-sourced software licensed under the MIT license.

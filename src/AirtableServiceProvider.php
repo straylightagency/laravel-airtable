@@ -20,7 +20,7 @@ class AirtableServiceProvider extends BaseServiceProvider
     public function register(): void
     {
         $this->app->singleton(AirtableManager::class, fn () => new AirtableManager(
-            apiKey: config('airtable.api_key'),
+            token: config('airtable.token'),
             baseId: config('airtable.base_id'),
             apiUrl: config('airtable.api_url'),
         ) );
