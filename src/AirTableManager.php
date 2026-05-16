@@ -1,14 +1,14 @@
 <?php
 
-namespace Straylightagency\LaravelAirTable;
+namespace Straylightagency\LaravelAirtable;
 
 /**
- * AirTableManager
+ * AirtableManager
  *
- * @package Straylightagency\LaravelAirTable
+ * @package Straylightagency\LaravelAirtable
  * @author Anthony Pauwels <anthony@straylightagency.be>
  */
-class AirTableManager
+class AirtableManager
 {
     /** @var string */
     const string API_URL = 'https://api.airtable.com/v0/%s/';
@@ -17,7 +17,7 @@ class AirTableManager
     protected array $bases = [];
 
     /**
-     * AirTableManager constructor.
+     * AirtableManager constructor.
      *
      * @param string $apiKey
      * @param string $baseId

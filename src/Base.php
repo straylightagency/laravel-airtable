@@ -1,11 +1,11 @@
 <?php
 
-namespace Straylightagency\LaravelAirTable;
+namespace Straylightagency\LaravelAirtable;
 
 /**
- * AirTable Base.
+ * Airtable Base.
  *
- * @package Straylightagency\LaravelAirTable
+ * @package Straylightagency\LaravelAirtable
  * @author Anthony Pauwels <anthony@straylightagency.be>
  */
 class Base

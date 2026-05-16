@@ -1,16 +1,16 @@
 <?php
 
-namespace Straylightagency\LaravelAirTable;
+namespace Straylightagency\LaravelAirtable;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
  * ServiceProvider.
  *
- * @package Straylightagency\LaravelAirTable
+ * @package Straylightagency\LaravelAirtable
  * @author Anthony Pauwels <anthony@straylightagency.be>
  */
-class AirTableServiceProvider extends BaseServiceProvider
+class AirtableServiceProvider extends BaseServiceProvider
 {
     /**
      * Register the DataLayer
@@ -19,7 +19,7 @@ class AirTableServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(AirTableManager::class, fn () => new AirTableManager(
+        $this->app->singleton(AirtableManager::class, fn () => new AirtableManager(
             apiKey: config('airtable.api_key'),
             baseId: config('airtable.base_id'),
             apiUrl: config('airtable.api_url'),
@@ -47,6 +47,6 @@ class AirTableServiceProvider extends BaseServiceProvider
      */
     public function provides(): array
     {
-        return [ AirTableManager::class ];
+        return [ AirtableManager::class ];
     }
 }

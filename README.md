@@ -1,4 +1,4 @@
-# Laravel AirTable Manager
+# Laravel Airtable Manager
 
 Interact with Airtable using a fluent API.
 
@@ -25,14 +25,14 @@ php artisan vendor:publish --tag=airtable
 
 ### Laravel without auto-discovery:
 
-If you don't use auto-discovery, add the `AirTableServiceProvider` to the providers array in `bootstrap/providers.php`:
+If you don't use auto-discovery, add the `AirtableServiceProvider` to the providers array in `bootstrap/providers.php`:
 ```php
-\Straylightagency\LaravelAirTable\AirTableServiceProvider::class,
+\Straylightagency\LaravelAirtable\AirtableServiceProvider::class,
 ```
 
 Then add this line to your facades in `config/app.php`:
 ```php
-'AirTable' => \Straylightagency\LaravelAirTable\AirTable::class,
+'Airtable' => \Straylightagency\LaravelAirtable\Airtable::class,
 ```
 
 ## Usage
@@ -40,15 +40,15 @@ Then add this line to your facades in `config/app.php`:
 The package provides by default a Facade for Laravel application. You can call methods directly using the Facade or use the alias instead.
 
 ```php
-use Straylightagency\LaravelAirTable\AirTable;
+use Straylightagency\LaravelAirtable\Airtable;
 
-$recordsA = AirTable::table('Your table')->view('View')->get();
-$recordsB = AirTable::table('Another table')->where('key', '=', 'value' )->view('In view this view')->get();
+$recordsA = Airtable::table('Your table')->view('View')->get();
+$recordsB = Airtable::table('Another table')->where('key', '=', 'value' )->view('In view this view')->get();
 ```
 
 ### API documentation
 
-#### AirTableManager
+#### AirtableManager
 ```php
 /**
  * Get a builder for a table from the default Base set in constructor
@@ -77,7 +77,7 @@ function table(string $table_name): Table;
 function count(): int;
 
 /**
- * If AirTable must perform an automatic data conversion from string values
+ * If Airtable must perform an automatic data conversion from string values
  */
 function typecast(bool $value): Table;
 

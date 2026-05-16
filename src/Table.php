@@ -1,15 +1,15 @@
 <?php
 
-namespace Straylightagency\LaravelAirTable;
+namespace Straylightagency\LaravelAirtable;
 
 use RuntimeException;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Client\ConnectionException;
 
 /**
- * AirTable Table query builder.
+ * Airtable Table query builder.
  *
- * @package Straylightagency\LaravelAirTable
+ * @package Straylightagency\LaravelAirtable
  * @author Anthony Pauwels <anthony@straylightagency.be>
  */
 class Table
@@ -67,7 +67,7 @@ class Table
     }
 
     /**
-     * If AirTable must perform an automatic data conversion from string values.
+     * If Airtable must perform an automatic data conversion from string values.
      *
      * @param bool $value
      * @return $this

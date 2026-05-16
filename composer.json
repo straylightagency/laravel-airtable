@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Straylightagency\\LaravelAirTable\\": "src/"
+            "Straylightagency\\LaravelAirtable\\": "src/"
         }
     }
 }

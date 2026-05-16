@@ -1,6 +1,6 @@
 <?php
 
-namespace Straylightagency\LaravelAirTable;
+namespace Straylightagency\LaravelAirtable;
 
 use RuntimeException;
 use Illuminate\Http\Client\Response;
@@ -9,9 +9,9 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\ConnectionException;
 
 /**
- * AirTable API Client.
+ * Airtable API Client.
  *
- * @package Straylightagency\LaravelAirTable
+ * @package Straylightagency\LaravelAirtable
  * @author Anthony Pauwels <anthony@straylightagency.be>
  */
 class Client
@@ -29,7 +29,7 @@ class Client
     }
 
     /**
-     * Send a GET request to AirTable.
+     * Send a GET request to Airtable.
      *
      * @param string $query_string
      * @param array $data
@@ -147,7 +147,7 @@ class Client
         $content = $response->json();
 
         if ( ! is_array( $content ) ) {
-            throw new RuntimeException( 'Content returned by AirTable Client is not an array.' );
+            throw new RuntimeException( 'Content returned by Airtable Client is not an array.' );
         }
 
         $status = $response->status();
